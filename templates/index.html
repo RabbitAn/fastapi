@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>python+jinja2</title>
+  </head>
+  <body>
+    <div class="container">
+      <!-- <h1>Welcome to the Python + Jinja2 Template Example</h1>
+      <p>
+        This is a simple example of using Jinja2 with Python to render HTML
+        templates.
+      </p> -->
+
+      <div class="cell1 cell"></div>
+      <div class="cell2 cell">
+        <div class="msg customer"></div>
+        <div class="time customer"></div>
+      </div>
+      <div class="cell3 cell customer"></div>
+      <div class="cell4 cell customer"></div>
+      <div class="cell5 cell customer"></div>
+      <div class="cell6 cell customer"></div>
+      <div class="cell7 cell customer"></div>
+      <div class="cell8 cell customer"></div>
+      <div class="cell9 cell customer"></div>
+      <div class="cell10 cell customer"></div>
+      <div class="cell11 cell customer"></div>
+
+    </div>
+  </body>
+  <script>
+    //增加ws功能
+    var ws = new WebSocket("ws://localhost:8000/ws");
+    ws.onmessage = function (event) {
+      // 解析 JSON 数据
+      const data = JSON.parse(event.data);
+      console.log(data);
+      document.querySelector(".time").innerHTML = data.time;
+      document.querySelector(".msg").innerHTML = data.message;
+      document.querySelector(".cell8").innerHTML = "核心数"+data.core_num;
+      document.querySelector(".cell7").innerHTML = "总内存"+data.totalMemory;
+      document.querySelector(".cell4").innerHTML = "已用内存"+data.usedMemory;
+      document.querySelector(".cell5").innerHTML = "CPU使用率"+data.freeMemory;
+      document.querySelector(".cell6").innerHTML = "内存使用率"+data.cpuUsage;
+      document.querySelector(".cell1").innerHTML = "操作系统"+data.os;
+      document.querySelector(".cell3").innerHTML = "操作系统版本"+data.osVersion;
+      document.querySelector(".cell9").innerHTML = "CPU频率"+data.cpuFrequency;
+      document.querySelector(".cell10").innerHTML = "CPU型号"+data.cpuModel;
+      document.querySelector(".cell11").innerHTML="已发送"+data.send+"<br>"+"已接收"+data.receive;
+    
+    };
+  </script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .container {
+      display: grid;
+      padding: 10px;
+      gap: 10px;
+      color: white;
+      height: 100vh;
+      width: 100vw;
+      background: linear-gradient(180deg, red, orange);
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+    }
+    .cell {
+      border: 1px solid 0a1b2f;
+      border-radius: 10px;
+    }
+
+    .cell1 {
+      display: grid;
+      grid-row: 1;
+      grid-column: 1;
+      background: transparent;
+      align-items: center;
+      justify-content: center;
+    }
+    .cell2 {
+        font-size: 26px;
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      grid-column: 2 / span 2;
+      grid-row: 1;    
+      background-color: transparent;
+    }
+    .customer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+  </style>
+</html>
