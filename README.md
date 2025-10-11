@@ -260,4 +260,14 @@ def test_create_user():
     assert response.status_code == 200
     assert response.json() == {"user_id": 1, "name": "Alice"}
 ```
+23、打包
+requirements.txt 中同时写上 PyInstaller
+pyinstaller
+fastapi
+uvicorn
+# 其它依赖...
+然后直接：
+pip install -r requirements.txt
+pyinstaller --onefile --noconsole main.py
+
 
